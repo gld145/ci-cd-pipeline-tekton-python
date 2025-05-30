@@ -28,3 +28,6 @@ coverage==6.3.2
 # Utilities
 httpie==3.2.1
 Flask-Cors
+flask
+flask-talisman
+gunicorn
