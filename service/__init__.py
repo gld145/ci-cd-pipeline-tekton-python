@@ -13,4 +13,3 @@ talisman.init_app(app, force_https=False)
 @app.route("/")
 def index():
     return {"name": "Account REST API Service", "version": "1.0"}
-
