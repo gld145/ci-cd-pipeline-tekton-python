@@ -31,3 +31,5 @@ Flask-Cors
 flask
 flask-talisman
 gunicorn
+flake8==4.0.1
+pycodestyle==2.8.0

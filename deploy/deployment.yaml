@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: accounts
-          image: us.icr.io/sn-labs-guylookili/accounts:1
+          image: IMAGE_NAME_HERE  # <-- remplacé dynamiquement par Tekton
           resources: {}
           env:
             - name: DATABASE_HOST
