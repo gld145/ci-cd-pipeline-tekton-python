@@ -65,7 +65,7 @@ spec:
         - name: args
           value: "-v --with-spec --spec-color"
 
-    # ✅ Nouvelle tâche build
+    # ✅ Tâche de build
     - name: build
       workspaces:
         - name: source
@@ -79,3 +79,23 @@ spec:
       runAfter:
         - tests 
         - lint
+
+    # ✅ Tâche de déploiement
+    - name: deploy
+      workspaces:
+        - name: manifest-dir
+          workspace: pipeline-workspace
+      taskRef:
+        name: openshift-client
+        kind: ClusterTask
+      params:
+        - name: SCRIPT
+          value: |
+            echo "Updating manifest..."
+            sed -i "s|IMAGE_NAME_HERE|$(params.build-image)|g" deploy/deployment.yaml
+            cat deploy/deployment.yaml
+            echo "Deploying to OpenShift..."
+            oc apply -f deploy/
+            oc get pods -l app=accounts
+      runAfter:
+        - build
