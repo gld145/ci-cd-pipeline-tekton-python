@@ -31,7 +31,7 @@ spec:
       runAfter:
         - init
 
-    # ✅ Nouvelle tâche lint ajoutée ici
+    # ✅ Tâche lint
     - name: lint
       taskRef:
         name: flake8
@@ -49,3 +49,18 @@ spec:
             - "--max-complexity=10"
             - "--max-line-length=127"
             - "--statistics"
+
+    # ✅ Tâche tests
+    - name: tests
+      taskRef:
+        name: nose
+      runAfter:
+        - clone
+      workspaces:
+        - name: source
+          workspace: pipeline-workspace
+      params:
+        - name: database_uri
+          value: "sqlite:///test.db"
+        - name: args
+          value: "-v --with-spec --spec-color"
