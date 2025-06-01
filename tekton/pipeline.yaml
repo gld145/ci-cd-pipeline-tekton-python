@@ -9,6 +9,8 @@ spec:
     - name: repo-url
     - name: branch
       default: main
+    - name: build-image        # ✅ Paramètre requis pour la tâche build
+
   tasks:
     - name: init
       workspaces:
@@ -31,7 +33,6 @@ spec:
       runAfter:
         - init
 
-    # ✅ Tâche lint
     - name: lint
       taskRef:
         name: flake8
@@ -50,7 +51,6 @@ spec:
             - "--max-line-length=127"
             - "--statistics"
 
-    # ✅ Tâche tests
     - name: tests
       taskRef:
         name: nose
@@ -64,3 +64,18 @@ spec:
           value: "sqlite:///test.db"
         - name: args
           value: "-v --with-spec --spec-color"
+
+    # ✅ Nouvelle tâche build
+    - name: build
+      workspaces:
+        - name: source
+          workspace: pipeline-workspace
+      taskRef:
+        name: buildah
+        kind: ClusterTask
+      params:
+        - name: IMAGE
+          value: "$(params.build-image)"
+      runAfter:
+        - tests 
+        - lint
