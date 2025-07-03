@@ -1,133 +1,162 @@
-# DevOps Capstone Template
+#  CI/CD with Tekton, OpenShift & Kubernetes
 
+[![CI Build](https://github.com/gld145/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)](https://github.com/gld145/devops-capstone-project/actions)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python 3.9](https://img.shields.io/badge/Python-3.9-green.svg)](https://shields.io/)
+[![Python 3.9](https://img.shields.io/badge/Python-3.9-green.svg)](https://www.python.org/downloads/release/python-390/)
+[![Author: guylandrydjolaud](https://img.shields.io/badge/Author-guylandrydjolaud-orange)](https://github.com/guylandrydjolaud)
 
-This repository contains the starter code for the project in [**IBM-CD0285EN-SkillsNetwork DevOps Capstone Project**](https://www.coursera.org/learn/devops-capstone-project?specialization=devops-and-software-engineering) which is part of the [**IBM DevOps and Software Engineering Professional Certificate**](https://www.coursera.org/professional-certificates/devops-and-software-engineering)
+---
 
-## Usage
+##  Overview
 
-You should use this template to start your DevOps Capstone project. It contains all of the code that you will need to get started.
+This repository contains the personalized version of the IBM DevOps Capstone Project.  
+It features a fully automated CI/CD pipeline using **GitHub Actions**, **Tekton**, and **OpenShift**,  
+with support for local Kubernetes development using **K3D**.
 
-Do Not fork this code! It is meant to be used by pressing the  <span style=color:white;background:green>**Use this Template**</span> button in GitHub. This will copy the code to your own repository with no connection back to the original repository like a fork would. This is what you want.
+---
 
-## Development Environment
+##  Usage
 
-These labs are designed to be executed in the IBM Developer Skills Network Cloud IDE with OpenShift. Please use the links provided in the Coursera Capstone project to access the lab environment.
+>  **Do not fork this repo**  
+Instead, use the green **"Use this Template"** button on GitHub.  
+This creates your own copy without linking it to the original like a fork.
 
-Once you are in the lab environment, you can initialize it with `bin/setup.sh` by sourcing it. (*Note: DO NOT run this program as a bash script. It sets environment variable and so must be sourced*):
+---
+
+##  Development Environment
+
+This project is designed for use in the **IBM Developer Skills Network Cloud IDE** with OpenShift.
+
+To initialize the environment:
 
 ```bash
 source bin/setup.sh
 ```
 
-This will install Python 3.9, make it the default, modify the bash prompt, create a Python virtual environment and activate it.
+This will:
 
-After sourcing it you prompt should look like this:
+- Install Python 3.9
+- Set it as the default version
+- Modify your bash prompt
+- Create and activate a Python virtual environment
+
+You should see:
 
 ```bash
 (venv) theia:project$
 ```
 
-## Useful commands
+---
 
-Under normal circumstances you should not have to run these commands. They are performed automatically at setup but may be useful when things go wrong:
+##  Useful Commands
 
-### Activate the Python 3.9 virtual environment
-
-You can activate the Python 3.9 environment with:
+### Activate the virtual environment
 
 ```bash
 source ~/venv/bin/activate
 ```
 
-### Installing Python dependencies
-
-These dependencies are installed as part of the setup process but should you need to install them again, first make sure that the Python 3.9 virtual environment is activated and then use the `make install` command:
+### Reinstall Python dependencies
 
 ```bash
 make install
 ```
 
-### Starting the Postgres Docker container
-
-The labs use Postgres running in a Docker container. If for some reason the service is not available you can start it with:
+### Start the PostgreSQL container
 
 ```bash
 make db
+docker ps   # Verify it's running
 ```
 
-You can use the `docker ps` command to make sure that postgres is up and running.
+---
 
-## Project layout
-
-The code for the microservice is contained in the `service` package. All of the test are in the `tests` folder. The code follows the **Model-View-Controller** pattern with all of the database code and business logic in the model (`models.py`), and all of the RESTful routing on the controller (`routes.py`).
+##  Project Structure
 
 ```text
-├── service         <- microservice package
-│   ├── common/     <- common log and error handlers
-│   ├── config.py   <- Flask configuration object
-│   ├── models.py   <- code for the persistent model
-│   └── routes.py   <- code for the REST API routes
-├── setup.cfg       <- tools setup config
-└── tests                       <- folder for all of the tests
-    ├── factories.py            <- test factories
-    ├── test_cli_commands.py    <- CLI tests
-    ├── test_models.py          <- model unit tests
-    └── test_routes.py          <- route unit tests
+├── service/                # Microservice logic (Flask)
+│   ├── common/             # Logging & error handling
+│   ├── config.py
+│   ├── models.py
+│   └── routes.py
+├── tests/                  # Unit tests
+│   ├── factories.py
+│   ├── test_models.py
+│   └── test_routes.py
+├── setup.cfg
+├── Makefile
+├── Dockerfile
+└── ci-build.yaml           # GitHub CI pipeline
 ```
 
-## Data Model
+---
 
-The Account model contains the following fields:
+##  Data Model (Accounts)
 
-| Name | Type | Optional |
-|------|------|----------|
-| id | Integer| False |
-| name | String(64) | False |
-| email | String(64) | False |
-| address | String(256) | False |
-| phone_number | String(32) | True |
-| date_joined | Date | False |
+| Field         | Type        | Optional |
+|---------------|-------------|----------|
+| id            | Integer     | ❌       |
+| name          | String(64)  | ❌       |
+| email         | String(64)  | ❌       |
+| address       | String(256) | ❌       |
+| phone_number  | String(32)  | ✅       |
+| date_joined   | Date        | ❌       |
 
-## Your Task
+---
 
-Complete this microservice by implementing REST API's for `READ`, `UPDATE`, `DELETE`, and `LIST` while maintaining **95%** code coverage. In true **Test Driven Development** fashion, first write tests for the code you "wish you had", and then write the code to make them pass.
+##  Your Capstone Challenge
 
-## Local Kubernetes Development
+- Implement REST APIs: `READ`, `UPDATE`, `DELETE`, `LIST`
+- Follow **TDD**: write tests before coding
+- Maintain **95%+ test coverage**
+- Use GitHub Actions + Tekton for CI/CD
+- Simulate deployment via OpenShift or K3D locally
 
-This repo can also be used for local Kubernetes development. It is not advised that you run these commands in the Cloud IDE environment. The purpose of these commands are to simulate the Cloud IDE environment locally on your computer. 
+---
 
-At a minimum, you will need [Docker Desktop](https://www.docker.com/products/docker-desktop) installed on your computer. For the full development environment, you will also need [Visual Studio Code](https://code.visualstudio.com) with the [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension from the Visual Studio Marketplace. All of these can be installed manually by clicking on the links above or you can use a package manager like **Homebrew** on Mac of **Chocolatey** on Windows.
+##  Kubernetes + Tekton (Local Setup)
 
-Please only use these commands for working stand-alone on your own computer with the VSCode Remote Container environment provided.
+You can replicate the cloud IDE on your machine using:
 
-1. Bring up a local K3D Kubernetes cluster
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [K3D (Kubernetes in Docker)](https://k3d.io/)
+- [VSCode Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-    ```bash
-    $ make cluster
-    ```
+### Local Setup Commands
 
-2. Install Tekton
+```bash
+make cluster        # Start K3D cluster
+make tekton         # Install Tekton
+make clustertasks   # Add IBM Lab ClusterTasks
+```
 
-    ```bash
-    $ make tekton
-    ```
+You're now ready to test Tekton pipelines locally as in the IBM Cloud IDE.
 
-3. Install the ClusterTasks that the Cloud IDE has
+---
 
-    ```bash
-    $ make clustertasks
-    ```
+##  Skills Demonstrated
 
-You can now perform Tekton development locally, just like in the Cloud IDE lab environment.
+- CI/CD automation with GitHub Actions & Tekton
+- Local Kubernetes development using K3D
+- RESTful API development with Flask
+- Infrastructure as Code with Makefile
+- Test Driven Development (TDD)
+- Containerization with Docker & Buildah
 
-## Author
+---
 
-[John Rofrano](https://www.coursera.org/instructor/johnrofrano), Senior Technical Staff Member, DevOps Champion, @ IBM Research, and Instructor @ Coursera
+##  Author
 
-## License
+Crafted with ❤️ by [Guy Landry Djolaud](https://github.com/guylandrydjolaud)  
+ guylandry.djolaud@gmail.com  
+ [devoptimize.tech](https://devoptimize.tech)
 
-Licensed under the Apache License. See [LICENSE](LICENSE)
+---
 
-## <h3 align="center"> © IBM Corporation 2022. All rights reserved. <h3/>
+##  License
+
+Licensed under Apache License 2.0 – see [LICENSE](LICENSE)
+
+---
+
+## <h3 align="center">© IBM Corporation 2022 | Customized for educational and portfolio purposes</h3>
