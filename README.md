@@ -1,12 +1,19 @@
 # Cloud-Native CI/CD System with Tekton for Python Microservice
 
-![Build Status](https://github.com/gld145/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Python 3.9](https://img.shields.io/badge/Python-3.9-green.svg)](https://shields.io/)
+[![CI Build](https://img.shields.io/badge/CI-Build%20Passing-brightgreen)]()
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue)]()
+[![Python](https://img.shields.io/badge/Python-3.9-blueviolet)]()
+[![Testing](https://img.shields.io/badge/Testing-TDD%20%26%20BDD-orange)]()
+[![Author](https://img.shields.io/badge/Made%20by-Guy%20Landry%20Djolaud-darkgreen)]()
 
-This repository presents a complete DevOps pipeline for a Python-based microservice, built using **Tekton**, **Docker**, and **OpenShift**. Developed as part of the [IBM DevOps Capstone Project](https://www.coursera.org/learn/devops-capstone-project?specialization=devops-and-software-engineering), it demonstrates cloud-native CI/CD automation practices.
+This repository contains a final project that demonstrates a complete **Cloud-Native CI/CD** pipeline  
+with a strong emphasis on software quality through **Test-Driven Development (TDD)** and  
+**Behavior-Driven Development (BDD)** practices.
 
->  Created by **Guy Landry Djolaud** – DevOps Architect passionate about Cloud, CI/CD, Automation & Containerization.
+> Built using **Python**, deployed using modern DevOps practices  
+> in a microservice architecture inspired by production-level workflows.
+>
+> **Created by Guy Landry Djolaud** — DevOps Architect focused on Cloud, Automation, and Containerization.
 
 ---
 
