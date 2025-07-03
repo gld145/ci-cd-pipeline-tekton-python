@@ -1,4 +1,4 @@
-# 🛠️ DevOps Capstone Project – Personalized CI/CD with Tekton and OpenShift
+# CI/CD with Tekton and OpenShift
 
 [![CI Build](https://github.com/gld145/devops-capstone-project/actions/workflows/ci-build.yaml/badge.svg)](https://github.com/gld145/devops-capstone-project/actions)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
